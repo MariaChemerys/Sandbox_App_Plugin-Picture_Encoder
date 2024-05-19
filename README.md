@@ -1,0 +1,1 @@
+# Sandbox App Plugin - Picture Encoder
