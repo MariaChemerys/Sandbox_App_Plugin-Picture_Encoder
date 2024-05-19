@@ -1,5 +1,4 @@
-//// Sandbox App Plugin - Picture Encoder.cpp : This file contains the 'main' function. Program execution begins and ends there.
-////
+////// Sandbox App Plugin - Picture Encoder.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 //#include <iostream>
 //#include <fstream>
@@ -76,9 +75,16 @@
 //}
 //
 //int main() {
-//    // Specify the path to your text file
-//    std::string inputFilePath = "parrot numbered grid.txt";
-//    std::string outputFilePath = "parrot coordinates of colored squares.txt";
+//    std::string inputFilePath;
+//    std::string outputFilePath;
+//
+//    // Prompt the user for the input file path
+//    std::cout << "Enter the input file path, including the .txt extension: ";
+//    std::getline(std::cin, inputFilePath);
+//
+//    // Prompt the user for the output file path
+//    std::cout << "Enter the output file path, including the .txt extension: ";
+//    std::getline(std::cin, outputFilePath);
 //
 //    // Call the function to read numbers and create the dynamic 2D array
 //    std::vector<std::vector<int>> resultArray = readNumbersFromFile(inputFilePath);
@@ -86,11 +92,11 @@
 //    // Call the function to convert coordinates to a formatted string array
 //    std::vector<std::string> coordinatesArray = convertCoordinatesToStringArray(resultArray);
 //
+//    //// Print the resulting formatted coordinates array
+//    //for (size_t i = 0; i < coordinatesArray.size(); ++i) {
+//    //    std::cout << i << ": " << coordinatesArray[i] << '\n';
+//    //}
 //
-//    // Print the resulting formatted coordinates array
-//    for (size_t i = 0; i < coordinatesArray.size(); ++i) {
-//        std::cout << i << ": " << coordinatesArray[i] << '\n';
-//    }
 //
 //    // Call the function to write the string array to a text file
 //    writeStringArrayToFile(outputFilePath, coordinatesArray);
@@ -176,12 +182,23 @@ int main() {
     std::string inputFilePath;
     std::string outputFilePath;
 
-    // Prompt the user for the input file path
-    std::cout << "Enter the input file path: ";
-    std::getline(std::cin, inputFilePath);
+    // Prompt the user for the input file path and check if the file exists
+    while (true) {
+        std::cout << "Enter the input file path, including the .txt extension: ";
+        std::getline(std::cin, inputFilePath);
+
+        std::ifstream testFile(inputFilePath);
+        if (testFile.is_open()) {
+            testFile.close();
+            break;
+        }
+        else {
+            std::cerr << "File does not exist. Please try again." << std::endl;
+        }
+    }
 
     // Prompt the user for the output file path
-    std::cout << "Enter the output file path: ";
+    std::cout << "Enter the output file path, including the .txt extension: ";
     std::getline(std::cin, outputFilePath);
 
     // Call the function to read numbers and create the dynamic 2D array
@@ -190,13 +207,14 @@ int main() {
     // Call the function to convert coordinates to a formatted string array
     std::vector<std::string> coordinatesArray = convertCoordinatesToStringArray(resultArray);
 
-    // Print the resulting formatted coordinates array
-    for (size_t i = 0; i < coordinatesArray.size(); ++i) {
-        std::cout << i << ": " << coordinatesArray[i] << '\n';
-    }
+    //// Print the resulting formatted coordinates array
+    //for (size_t i = 0; i < coordinatesArray.size(); ++i) {
+    //    std::cout << i << ": " << coordinatesArray[i] << '\n';
+    //}
 
     // Call the function to write the string array to a text file
     writeStringArrayToFile(outputFilePath, coordinatesArray);
 
     return 0;
 }
+
