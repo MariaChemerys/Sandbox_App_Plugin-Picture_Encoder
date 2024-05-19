@@ -92,9 +92,11 @@ int main() {
             break;
         }
         else {
-            std::cerr << "File does not exist. Please try again." << std::endl;
+            std::cerr << "File does not exist. Please try again." << std::endl << std::endl;
         }
     }
+
+    std::cout << std::endl;
 
     // Prompt the user for the output file path and check if it includes the .txt extension
     while (true) {
@@ -110,9 +112,11 @@ int main() {
             break;
         }
         else {
-            std::cerr << "Output file path must include the .txt extension. Please try again." << std::endl;
+            std::cerr << "Output file path must include the .txt extension. Please try again." << std::endl << std::endl;
         }
     }
+
+    std::cout << std::endl;
 
     // Call the function to read numbers and create the dynamic 2D array
     std::vector<std::vector<int>> resultArray = readNumbersFromFile(inputFilePath);
@@ -120,14 +124,12 @@ int main() {
     // Call the function to convert coordinates to a formatted string array
     std::vector<std::string> coordinatesArray = convertCoordinatesToStringArray(resultArray);
 
-    //// Print the resulting formatted coordinates array
-    //for (size_t i = 0; i < coordinatesArray.size(); ++i) {
-    //    std::cout << i << ": " << coordinatesArray[i] << '\n';
-    //}
-
     // Call the function to write the string array to a text file
     writeStringArrayToFile(outputFilePath, coordinatesArray);
 
+    // Notify the user about the successful encoding
+    std::cout << "Picture encoding was performed successfully. The file named " << outputFilePath << " was added to the project folder.";
+    std::cout << std::endl;
+
     return 0;
 }
-
