@@ -1,4 +1,4 @@
-////// Sandbox App Plugin - Picture Encoder.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//// Sandbox App Plugin - Picture Encoder.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 //#include <iostream>
 //#include <fstream>
@@ -78,9 +78,20 @@
 //    std::string inputFilePath;
 //    std::string outputFilePath;
 //
-//    // Prompt the user for the input file path
-//    std::cout << "Enter the input file path, including the .txt extension: ";
-//    std::getline(std::cin, inputFilePath);
+//    // Prompt the user for the input file path and check if the file exists
+//    while (true) {
+//        std::cout << "Enter the input file path, including the .txt extension: ";
+//        std::getline(std::cin, inputFilePath);
+//
+//        std::ifstream testFile(inputFilePath);
+//        if (testFile.is_open()) {
+//            testFile.close();
+//            break;
+//        }
+//        else {
+//            std::cerr << "File does not exist. Please try again." << std::endl;
+//        }
+//    }
 //
 //    // Prompt the user for the output file path
 //    std::cout << "Enter the output file path, including the .txt extension: ";
@@ -97,12 +108,12 @@
 //    //    std::cout << i << ": " << coordinatesArray[i] << '\n';
 //    //}
 //
-//
 //    // Call the function to write the string array to a text file
 //    writeStringArrayToFile(outputFilePath, coordinatesArray);
 //
 //    return 0;
 //}
+//
 
 #include <iostream>
 #include <fstream>
@@ -197,9 +208,18 @@ int main() {
         }
     }
 
-    // Prompt the user for the output file path
-    std::cout << "Enter the output file path, including the .txt extension: ";
-    std::getline(std::cin, outputFilePath);
+    // Prompt the user for the output file path and check if it includes the .txt extension
+    while (true) {
+        std::cout << "Enter the output file path, including the .txt extension: ";
+        std::getline(std::cin, outputFilePath);
+
+        if (outputFilePath.size() >= 4 && outputFilePath.substr(outputFilePath.size() - 4) == ".txt") {
+            break;
+        }
+        else {
+            std::cerr << "Output file path must include the .txt extension. Please try again." << std::endl;
+        }
+    }
 
     // Call the function to read numbers and create the dynamic 2D array
     std::vector<std::vector<int>> resultArray = readNumbersFromFile(inputFilePath);
@@ -217,4 +237,3 @@ int main() {
 
     return 0;
 }
-
